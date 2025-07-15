@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -13,9 +12,11 @@ import {
   XCircle,
   AlertCircle,
   Download,
-  Eye
+  Eye,
+  UserPlus
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import AddEmployeeForm from '@/components/AddEmployeeForm';
 
 const AdminDashboard = () => {
   const { toast } = useToast();
@@ -156,10 +157,12 @@ const AdminDashboard = () => {
 
       {/* Main Content Tabs */}
       <Tabs defaultValue="leaves" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="leaves">Leave Management</TabsTrigger>
           <TabsTrigger value="employees">Employee Overview</TabsTrigger>
+          <TabsTrigger value="add-employee">Add Employee</TabsTrigger>
           <TabsTrigger value="reports">Reports & Analytics</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
         <TabsContent value="leaves" className="space-y-4">
@@ -263,6 +266,10 @@ const AdminDashboard = () => {
           </Card>
         </TabsContent>
 
+        <TabsContent value="add-employee" className="space-y-4">
+          <AddEmployeeForm />
+        </TabsContent>
+
         <TabsContent value="reports" className="space-y-4">
           <Card>
             <CardHeader>
@@ -292,6 +299,33 @@ const AdminDashboard = () => {
                   <Download className="h-6 w-6 mb-2" />
                   Department Wise Report
                 </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="settings" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Admin Settings</CardTitle>
+              <CardDescription>
+                Configure system settings and preferences
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="p-4 border rounded-lg">
+                  <h4 className="font-medium mb-2">System Configuration</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Manage leave policies, working hours, and holiday calendar
+                  </p>
+                </div>
+                <div className="p-4 border rounded-lg">
+                  <h4 className="font-medium mb-2">User Management</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Handle user roles, permissions, and access controls
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>
