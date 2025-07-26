@@ -62,21 +62,17 @@ const AddEmployeeForm = () => {
     try {
       console.log('Adding new employee:', data);
       
-      // Insert employee data into the employees table
-      const { data: employeeData, error } = await supabase
-        .from('employees')
-        .insert([
-          {
-            name: data.name,
-            email: data.email,
-            department: data.department,
-            role: data.role,
-            employee_id: data.employee_id,
-            phone: data.phone || null,
-          }
-        ])
-        .select()
-        .single();
+      // Use SQL query directly since TypeScript types haven't updated yet
+      const { error } = await supabase
+        .from('employees' as any)
+        .insert([{
+          name: data.name,
+          email: data.email,
+          department: data.department,
+          role: data.role,
+          employee_id: data.employee_id,
+          phone: data.phone || null,
+        }]);
 
       if (error) {
         console.error('Error adding employee:', error);
@@ -88,7 +84,7 @@ const AddEmployeeForm = () => {
         return;
       }
 
-      console.log('Employee added successfully:', employeeData);
+      console.log('Employee added successfully');
       
       toast({
         title: 'Success',
