@@ -405,6 +405,48 @@ export type Database = {
         }
         Relationships: []
       }
+      time_entries: {
+        Row: {
+          clock_in_time: string | null
+          clock_out_time: string | null
+          created_at: string
+          date: string
+          employee_id: string
+          employee_name: string
+          id: string
+          notes: string | null
+          status: string
+          total_hours: number | null
+          updated_at: string
+        }
+        Insert: {
+          clock_in_time?: string | null
+          clock_out_time?: string | null
+          created_at?: string
+          date?: string
+          employee_id: string
+          employee_name: string
+          id?: string
+          notes?: string | null
+          status?: string
+          total_hours?: number | null
+          updated_at?: string
+        }
+        Update: {
+          clock_in_time?: string | null
+          clock_out_time?: string | null
+          created_at?: string
+          date?: string
+          employee_id?: string
+          employee_name?: string
+          id?: string
+          notes?: string | null
+          status?: string
+          total_hours?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       vehicles: {
         Row: {
           availability: boolean | null

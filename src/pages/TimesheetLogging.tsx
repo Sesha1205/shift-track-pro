@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,9 +9,11 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Badge } from '@/components/ui/badge';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon, Clock, Plus, Edit, Trash2, Save } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Plus, Edit, Trash2, Save, Timer } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+import ClockInOut from '@/components/ClockInOut';
 
 interface Task {
   id: number;
@@ -21,6 +23,18 @@ interface Task {
   endTime: string;
   date: Date;
   duration: number;
+}
+
+interface TimeEntry {
+  id: string;
+  employee_id: string;
+  employee_name: string;
+  clock_in_time: string | null;
+  clock_out_time: string | null;
+  total_hours: number | null;
+  date: string;
+  status: 'clocked_in' | 'clocked_out';
+  notes: string | null;
 }
 
 const TimesheetLogging = () => {
@@ -140,7 +154,12 @@ const TimesheetLogging = () => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        {/* Clock In/Out */}
+        <div>
+          <ClockInOut />
+        </div>
+        
         {/* Date Picker and Summary */}
         <div className="space-y-4">
           <Card>

@@ -13,10 +13,12 @@ import {
   AlertCircle,
   Download,
   Eye,
-  UserPlus
+  UserPlus,
+  Timer
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import AddEmployeeForm from '@/components/AddEmployeeForm';
+import TimesheetManagement from '@/components/TimesheetManagement';
 
 const AdminDashboard = () => {
   const { toast } = useToast();
@@ -157,9 +159,10 @@ const AdminDashboard = () => {
 
       {/* Main Content Tabs */}
       <Tabs defaultValue="leaves" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-5">
+        <TabsList className="grid w-full grid-cols-6">
           <TabsTrigger value="leaves">Leave Management</TabsTrigger>
           <TabsTrigger value="employees">Employee Overview</TabsTrigger>
+          <TabsTrigger value="timesheet">Timesheet</TabsTrigger>
           <TabsTrigger value="add-employee">Add Employee</TabsTrigger>
           <TabsTrigger value="reports">Reports & Analytics</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
@@ -264,6 +267,10 @@ const AdminDashboard = () => {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="timesheet" className="space-y-4">
+          <TimesheetManagement />
         </TabsContent>
 
         <TabsContent value="add-employee" className="space-y-4">

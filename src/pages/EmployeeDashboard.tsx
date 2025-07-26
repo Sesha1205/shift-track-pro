@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useNavigate } from 'react-router-dom';
+import ClockInOut from '@/components/ClockInOut';
 import { 
   Clock, 
   Calendar, 
@@ -165,8 +166,14 @@ const EmployeeDashboard = () => {
         </div>
       </div>
 
-      {/* Recent Tasks */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Clock In/Out Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-1">
+          <ClockInOut />
+        </div>
+        
+        {/* Recent Tasks and Events */}
+        <div className="lg:col-span-2 grid grid-cols-1 gap-6">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -248,6 +255,7 @@ const EmployeeDashboard = () => {
             </Button>
           </CardContent>
         </Card>
+        </div>
       </div>
     </div>
   );
