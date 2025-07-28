@@ -50,45 +50,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // Mock authentication - in real app, this would be an API call
-      const mockUsers = [
-        {
-          id: '1',
-          name: 'John Doe',
-          email: 'john@company.com',
-          department: 'Engineering',
-          role: 'employee' as const,
-          password: 'password123'
-        },
-        {
-          id: '2',
-          name: 'Jane Smith',
-          email: 'jane@company.com',
+      // Check if admin login
+      if (email === 'admin@company.com' && password === 'admin123') {
+        const adminUser = {
+          id: 'admin-1',
+          name: 'HR Admin',
+          email: 'admin@company.com',
           department: 'HR',
-          role: 'admin' as const,
-          password: 'admin123'
-        },
-        {
-          id: '3',
-          name: 'Mike Johnson',
-          email: 'mike@company.com',
-          department: 'Marketing',
-          role: 'employee' as const,
-          password: 'password123'
-        }
-      ];
-
-      const foundUser = mockUsers.find(u => u.email === email && u.password === password);
-      
-      if (foundUser) {
-        const { password: _, ...userWithoutPassword } = foundUser;
-        const token = `mock_jwt_token_${foundUser.id}`;
+          role: 'admin' as const
+        };
         
+        const token = `mock_jwt_token_${adminUser.id}`;
         localStorage.setItem('auth_token', token);
-        localStorage.setItem('user_data', JSON.stringify(userWithoutPassword));
-        setUser(userWithoutPassword);
+        localStorage.setItem('user_data', JSON.stringify(adminUser));
+        setUser(adminUser);
         return true;
       }
+
+      // Check if employee exists in employees table
+      // For now, employees will use default password: "employee123"
+      if (password === 'employee123') {
+        // In production, this would query the employees table
+        // For demo purposes, any email with employee123 password will work as employee
+        const employeeUser = {
+          id: `emp_${Date.now()}`,
+          name: email.split('@')[0], // Use email prefix as name
+          email: email,
+          department: 'General',
+          role: 'employee' as const
+        };
+        
+        const token = `mock_jwt_token_${employeeUser.id}`;
+        localStorage.setItem('auth_token', token);
+        localStorage.setItem('user_data', JSON.stringify(employeeUser));
+        setUser(employeeUser);
+        return true;
+      }
+      
       return false;
     } catch (error) {
       console.error('Login error:', error);

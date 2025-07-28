@@ -45,9 +45,8 @@ const Login = () => {
   };
 
   const demoAccounts = [
-    { email: 'john@company.com', password: 'password123', role: 'Employee' },
-    { email: 'jane@company.com', password: 'admin123', role: 'Admin/HR' },
-    { email: 'mike@company.com', password: 'password123', role: 'Employee' },
+    { email: 'admin@company.com', password: 'admin123', role: 'Admin/HR' },
+    { email: '[employee-email]', password: 'employee123', role: 'Employee (Default Password)' },
   ];
 
   return (
@@ -120,9 +119,9 @@ const Login = () => {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-sm">Demo Accounts</CardTitle>
+            <CardTitle className="text-sm">Login Information</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-3">
             {demoAccounts.map((account, index) => (
               <div key={index} className="text-xs p-2 bg-muted rounded">
                 <div className="font-medium">{account.role}</div>
@@ -130,6 +129,12 @@ const Login = () => {
                 <div>Password: {account.password}</div>
               </div>
             ))}
+            <div className="text-xs p-2 bg-blue-50 dark:bg-blue-950 rounded border-l-2 border-blue-400">
+              <div className="font-medium text-blue-700 dark:text-blue-300">For HR/Admin:</div>
+              <div className="text-blue-600 dark:text-blue-400">
+                After adding employees, provide them with their email and the default password "employee123" to login.
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
