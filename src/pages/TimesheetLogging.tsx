@@ -50,35 +50,7 @@ const TimesheetLogging = () => {
     endTime: '',
   });
 
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: 'Code Review - User Authentication',
-      description: 'Reviewed pull requests for authentication module',
-      startTime: '09:00',
-      endTime: '11:30',
-      date: new Date(),
-      duration: 2.5
-    },
-    {
-      id: 2,
-      title: 'Team Meeting - Sprint Planning',
-      description: 'Discussed upcoming sprint goals and task assignments',
-      startTime: '14:00',
-      endTime: '15:00',
-      date: new Date(),
-      duration: 1
-    },
-    {
-      id: 3,
-      title: 'Bug Fix - Payment Integration',
-      description: 'Fixed critical bug in payment processing system',
-      startTime: '15:30',
-      endTime: '18:30',
-      date: new Date(),
-      duration: 3
-    }
-  ]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const calculateDuration = (start: string, end: string): number => {
     if (!start || !end) return 0;

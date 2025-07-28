@@ -26,24 +26,8 @@ const AttendanceSummary = () => {
     { value: '2023-11', label: 'November 2023' },
   ];
 
-  // Mock attendance data
-  const attendanceData: AttendanceRecord[] = [
-    { date: '2024-01-01', status: 'leave', leaveType: 'Holiday' },
-    { date: '2024-01-02', status: 'present', hoursWorked: 8.5, tasksLogged: 4 },
-    { date: '2024-01-03', status: 'present', hoursWorked: 8.0, tasksLogged: 3 },
-    { date: '2024-01-04', status: 'present', hoursWorked: 7.5, tasksLogged: 5 },
-    { date: '2024-01-05', status: 'present', hoursWorked: 8.0, tasksLogged: 3 },
-    { date: '2024-01-08', status: 'present', hoursWorked: 8.5, tasksLogged: 4 },
-    { date: '2024-01-09', status: 'present', hoursWorked: 8.0, tasksLogged: 6 },
-    { date: '2024-01-10', status: 'leave', leaveType: 'Casual' },
-    { date: '2024-01-11', status: 'leave', leaveType: 'Casual' },
-    { date: '2024-01-12', status: 'leave', leaveType: 'Casual' },
-    { date: '2024-01-15', status: 'present', hoursWorked: 8.0, tasksLogged: 4 },
-    { date: '2024-01-16', status: 'present', hoursWorked: 7.5, tasksLogged: 3 },
-    { date: '2024-01-17', status: 'absent' },
-    { date: '2024-01-18', status: 'present', hoursWorked: 8.5, tasksLogged: 5 },
-    { date: '2024-01-19', status: 'present', hoursWorked: 8.0, tasksLogged: 4 },
-  ];
+  // No demo data - employees start fresh
+  const attendanceData: AttendanceRecord[] = [];
 
   const calculateStats = () => {
     const totalDays = attendanceData.length;
@@ -244,29 +228,41 @@ const AttendanceSummary = () => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {attendanceData.map((record) => (
-                  <TableRow key={record.date}>
-                    <TableCell className="font-medium">
-                      {new Date(record.date).toLocaleDateString('en-US', {
-                        weekday: 'short',
-                        month: 'short',
-                        day: 'numeric'
-                      })}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        {getStatusIcon(record.status)}
-                        {getStatusBadge(record.status, record.leaveType)}
+                {attendanceData.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
+                      <div className="flex flex-col items-center gap-2">
+                        <Calendar className="h-8 w-8 opacity-50" />
+                        <p>No attendance records found</p>
+                        <p className="text-sm">Start clocking in to see your attendance data</p>
                       </div>
                     </TableCell>
-                    <TableCell>
-                      {record.hoursWorked ? `${record.hoursWorked}h` : '-'}
-                    </TableCell>
-                    <TableCell>
-                      {record.tasksLogged || '-'}
-                    </TableCell>
                   </TableRow>
-                ))}
+                ) : (
+                  attendanceData.map((record) => (
+                    <TableRow key={record.date}>
+                      <TableCell className="font-medium">
+                        {new Date(record.date).toLocaleDateString('en-US', {
+                          weekday: 'short',
+                          month: 'short',
+                          day: 'numeric'
+                        })}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          {getStatusIcon(record.status)}
+                          {getStatusBadge(record.status, record.leaveType)}
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        {record.hoursWorked ? `${record.hoursWorked}h` : '-'}
+                      </TableCell>
+                      <TableCell>
+                        {record.tasksLogged || '-'}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
               </TableBody>
             </Table>
           </CardContent>

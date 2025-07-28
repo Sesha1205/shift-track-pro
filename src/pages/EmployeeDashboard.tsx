@@ -30,30 +30,30 @@ const EmployeeDashboard = () => {
   const quickStats = [
     {
       title: 'Hours This Week',
-      value: '38.5',
+      value: '0.0',
       icon: Clock,
-      trend: '+2.5h from last week',
+      trend: 'Start logging your hours',
       color: 'text-blue-600'
     },
     {
       title: 'Leave Balance',
-      value: '12 days',
+      value: '0 days',
       icon: Calendar,
-      trend: 'Casual: 8, Sick: 4',
+      trend: 'No leave applications yet',
       color: 'text-green-600'
     },
     {
       title: 'Attendance Rate',
-      value: '95%',
+      value: '0%',
       icon: TrendingUp,
       trend: 'This month',
       color: 'text-purple-600'
     },
     {
       title: 'Pending Requests',
-      value: '2',
+      value: '0',
       icon: AlertCircle,
-      trend: 'Leave applications',
+      trend: 'No pending requests',
       color: 'text-orange-600'
     }
   ];
@@ -89,29 +89,7 @@ const EmployeeDashboard = () => {
     }
   ];
 
-  const recentTasks = [
-    {
-      id: 1,
-      title: 'Code Review - User Authentication',
-      date: '2024-01-15',
-      duration: '2.5 hours',
-      status: 'completed'
-    },
-    {
-      id: 2,
-      title: 'Team Meeting - Sprint Planning',
-      date: '2024-01-15',
-      duration: '1 hour',
-      status: 'completed'
-    },
-    {
-      id: 3,
-      title: 'Bug Fix - Payment Integration',
-      date: '2024-01-14',
-      duration: '3 hours',
-      status: 'completed'
-    }
-  ];
+  const recentTasks: any[] = [];
 
   return (
     <div className="p-6 space-y-6">
@@ -184,23 +162,31 @@ const EmployeeDashboard = () => {
               Your latest logged activities
             </CardDescription>
           </CardHeader>
-          <CardContent>
+           <CardContent>
             <div className="space-y-4">
-              {recentTasks.map((task) => (
-                <div key={task.id} className="flex items-center justify-between p-3 border rounded-lg">
-                  <div className="flex-1">
-                    <h4 className="font-medium">{task.title}</h4>
-                    <p className="text-sm text-muted-foreground">{task.date}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium">{task.duration}</p>
-                    <div className="flex items-center gap-1 mt-1">
-                      <CheckCircle className="h-3 w-3 text-green-500" />
-                      <span className="text-xs text-green-600">Completed</span>
+              {recentTasks.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  <p>No tasks logged yet</p>
+                  <p className="text-sm">Start by logging your first task</p>
+                </div>
+              ) : (
+                recentTasks.map((task) => (
+                  <div key={task.id} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div className="flex-1">
+                      <h4 className="font-medium">{task.title}</h4>
+                      <p className="text-sm text-muted-foreground">{task.date}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-medium">{task.duration}</p>
+                      <div className="flex items-center gap-1 mt-1">
+                        <CheckCircle className="h-3 w-3 text-green-500" />
+                        <span className="text-xs text-green-600">Completed</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
             <Button 
               variant="outline" 
@@ -222,28 +208,12 @@ const EmployeeDashboard = () => {
               Your schedule for this week
             </CardDescription>
           </CardHeader>
-          <CardContent>
+           <CardContent>
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <h4 className="font-medium">Team Standup</h4>
-                  <p className="text-sm text-muted-foreground">Tomorrow, 9:00 AM</p>
-                </div>
-                <Badge variant="outline">Meeting</Badge>
-              </div>
-              <div className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <h4 className="font-medium">Project Review</h4>
-                  <p className="text-sm text-muted-foreground">Thursday, 2:00 PM</p>
-                </div>
-                <Badge variant="outline">Review</Badge>
-              </div>
-              <div className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <h4 className="font-medium">Client Presentation</h4>
-                  <p className="text-sm text-muted-foreground">Friday, 11:00 AM</p>
-                </div>
-                <Badge variant="outline">Presentation</Badge>
+              <div className="text-center py-8 text-muted-foreground">
+                <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                <p>No upcoming events scheduled</p>
+                <p className="text-sm">Your calendar is empty</p>
               </div>
             </div>
             <Button 
