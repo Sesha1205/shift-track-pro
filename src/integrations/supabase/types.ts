@@ -244,6 +244,60 @@ export type Database = {
         }
         Relationships: []
       }
+      leave_requests: {
+        Row: {
+          applied_date: string
+          approved_by: string | null
+          approved_date: string | null
+          created_at: string
+          days: number
+          employee_id: string
+          employee_name: string
+          from_date: string
+          id: string
+          leave_type: string
+          reason: string
+          rejection_reason: string | null
+          status: string
+          to_date: string
+          updated_at: string
+        }
+        Insert: {
+          applied_date?: string
+          approved_by?: string | null
+          approved_date?: string | null
+          created_at?: string
+          days: number
+          employee_id: string
+          employee_name: string
+          from_date: string
+          id?: string
+          leave_type: string
+          reason: string
+          rejection_reason?: string | null
+          status?: string
+          to_date: string
+          updated_at?: string
+        }
+        Update: {
+          applied_date?: string
+          approved_by?: string | null
+          approved_date?: string | null
+          created_at?: string
+          days?: number
+          employee_id?: string
+          employee_name?: string
+          from_date?: string
+          id?: string
+          leave_type?: string
+          reason?: string
+          rejection_reason?: string | null
+          status?: string
+          to_date?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       meditation_sessions: {
         Row: {
           completed_at: string
